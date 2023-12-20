@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block extend_head %}
+    <title>CASFETA Website - Teachings</title>
+{% endblock %}
+
+{% block content %}
+    <section class="single-post-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 post-content" data-aos="fade-up">
+
+                    <!-- ======= Single Post Content ======= -->
+                    <div class="single-post">
+                        <h1>Audio List</h1>
+
+                        {% for audio in audios %}
+                            <article>
+                                <span class="date">{{ audio.audio_created_at|date:"F d, Y" }}</span>
+                                <h2>{{ audio.title|safe }}</h2>
+                                <audio controls>
+                                    <source src="{{ audio.audio_file.url }}" type="audio/mpeg">
+                                    Your browser does not support the audio element.
+                                </audio>
+                            </article>
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extend_footer %}
+    <!-- Include any additional footer content if needed -->
+{% endblock %}
+
+</body>
+</html>
+<!-- teachings_app/templates/teachings_app/audio_list.html -->

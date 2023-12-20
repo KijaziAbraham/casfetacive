@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extend_head %}
+    <title>CASFETA CIVE News</title>
+{% endblock %}
+
+{% block content %}
+    <section id="hero-slider" class="hero-slider">
+        <div class="container-md" data-aos="fade-in"> 
+            <div class="row">
+                <div class="col-12">
+                    <!-- Theme of Semester -->
+                    <div class="card mb-3">
+                        <a href="{% url 'home_detail_view' pk=home_data.pk %}">
+                            <img src="{{ home_data.picture_of_semester.url }}" class="card-img-top" alt="Theme of Semester">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ home_data.theme_of_semester }}</h2>
+                                <p class="card-text">
+                                    <strong>{{ home_data.theme_of_semester }}</strong><br>
+                                    {{ home_data.content }}
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Theme of the Week -->
+                    <div class="card mb-3">
+                        <a href="{% url 'home_detail_view' pk=home_data.pk %}">
+                            <img src="{{ home_data.picture_of_week.url }}" class="card-img-top" alt="Theme of the Week">
+                            <div class="card-body">
+                                <h2 class="card-title">{{ home_data.theme_of_week }}</h2>
+                                <p class="card-text">
+                                    <strong>{{ home_data.theme_of_week }}</strong><br>
+                                    <!-- This content will be dynamic and change every week -->
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extend_footer %}
+    <!-- Include any additional footer content if needed -->
+{% endblock %}

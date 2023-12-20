@@ -1,0 +1,30 @@
+Add your existing CSS styles here
+
+.thumbnail-classic {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.thumbnail-classic-img-wrap {
+    position: relative;
+}
+
+.thumbnail-classic-caption {
+    padding: 20px;
+    text-align: center;
+}
+
+.thumbnail-classic-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.thumbnail-classic-link {
+    color: #333;
+}
+
+/* LightGallery styles */
+.lg-sub-html {
+    font-size: 16px;
+}

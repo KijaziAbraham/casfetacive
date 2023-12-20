@@ -1,0 +1,70 @@
+{% extends 'main.html' %}
+
+{% block extend_head %}
+    <title>CASFETA CIVE News - {{ post.title }}</title>
+{% endblock %}
+
+{% block content %}
+    <section class="single-post-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 post-content" data-aos="fade-up">
+
+                    <!-- ======= Single Post Content ======= -->
+                    <div class="single-post">
+                        <div class="post-meta">
+                            <span class="date">{{ post.created_at|date:"M d, Y" }}</span>
+                            <span>{{ post.category.name }}</span>
+                           <h1 class="mb-5" >{{ post.title }}</h1>
+
+                            {% if post.image %}
+                                <figure class="my-4">
+                                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+                                    <figcaption>{{ post.title }}</figcaption>
+                                </figure>
+                            {% endif %}
+                        </div>
+
+                        <p>{{ post.content }}</p>
+
+                        <div class="d-flex align-items-center author">
+                            <div class="name">
+                                <h3 class="m-0 p-0">{{ post.author.user.username }}</h3>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- ======= Comments ======= -->
+                    <!-- Display existing comments -->
+<div class="comments">
+    {% for comment in comments %}
+        <p>{{ comment.name }} - {{ comment.subject }} - {{ comment.created_at|date }}</p>
+        <p>{{ comment.message }}</p>
+    {% endfor %}
+</div>
+
+<!-- Display comment form -->
+<div class="form mt-5">
+    <form method="post" action="{% url 'post_detail' pk=post.pk %}" role="form" class="php-email-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="text-center"><button type="submit">Send Message</button></div>
+    </form>
+</div>
+
+                      
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+{% endblock %}
+
+{% block extend_footer %}
+{% endblock %}
+</body>
+</html>

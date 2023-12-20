@@ -1,0 +1,38 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block extend_head %}
+    <title>CASFETA Website - Teachings</title>
+{% endblock %}
+
+{% block content %}
+    <section class="section section-xl bg-default">
+        <div class="container">
+            <div class="row row-30 justify-content-sm-center" data-lightgallery="group">
+                {% for gallery in gallerys %}
+                    <div class="col-sm-10 col-md-6 col-lg-4">
+                        <figure class="thumbnail-classic">
+                            <div class="thumbnail-classic-img-wrap">
+                                <img src="{{ gallery.image.url }}" alt="{{ gallery.image.name }}" width="370" height="370">
+                            </div>
+                            <figcaption class="thumbnail-classic-caption text-center">
+                                <div>
+                                    <h4 class="thumbnail-classic-title">{{ gallery.title }}</h4>
+                                </div>
+                                <hr class="divider divider-sm">
+                                <p>{{ gallery.created_at|date:"F d, Y" }}</p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <script src="{% static 'lightgallery/js/lightgallery.min.js' %}"></script>
+      <!-- Include LightGallery CSS/JS -->
+<link rel="stylesheet" href="{% static 'lightgallery/css/lightgallery.min.css' %}">
+
+{% endblock %}
+
+{% block extend_footer %}
+{% endblock %}

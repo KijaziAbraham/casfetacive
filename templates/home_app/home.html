@@ -1,0 +1,142 @@
+{% extends 'main.html' %}
+
+
+{% block extend_head %}
+    <title>CASFETA CIVE News</title>
+{% endblock %}
+
+{% block content %}
+    <!-- Swiper Container -->
+<section id="hero-slider" class="hero-slider">
+    <div class="container-fluid" data-aos="fade-up">
+        <div class="row">
+            <div class="col-12">
+                <div class="swiper sliderFeaturedPosts">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1: Theme of Semester -->
+                        <div class="swiper-slide">
+                            <a href="{% url 'home_detail_view' pk=home_data.pk %}" class="img-bg d-flex align-items-end" style="background-image: url('{{ home_data.picture_of_semester.url }}');">
+                                <div class="img-bg-inner">
+                                    <h2>Theme of Semester</h2>
+                                    <p>
+                                        <strong>{{ home_data.theme_of_semester|safe }}</strong><br>
+                                        {{ home_data.content|safe }}
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- Slide 2: Theme of the Week -->
+                        <div class="swiper-slide">
+                            <a href="{% url 'home_detail_view' pk=home_data.pk %}" class="img-bg d-flex align-items-end" style="background-image: url('{{ home_data.picture_of_week.url }}');">
+                                <div class="img-bg-inner">
+                                    <h2>Theme of the Week</h2>
+                                    <p>
+                                        <strong>{{ home_data.theme_of_week|safe }}</strong><br>
+                                        <!-- This content will be dynamic and change every week -->
+                                    </p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="custom-swiper-button-next">
+                        <span class="bi-chevron-right"></span>
+                    </div>
+                    <div class="custom-swiper-button-prev">
+                        <span class="bi-chevron-left"></span>
+                    </div>
+
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    
+
+    <!-- Section 3: Malengo -->
+<section class="single-post-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 post-content" data-aos="fade-up">
+                <!-- Main Content -->
+                <div class="single-post">
+                    <div class="post-meta">
+                        <span class="date">{{ home_data.malengo_created_at|date:"F d, Y" }}</span>
+                        {% for category in home_data.categories.all %}
+                            <span class="category">{{ category.name }}</span>
+                        {% endfor %}
+                        <!-- Add other meta information if needed -->
+                    </div>
+                    <h1 class="mb-5">{{ home_data.malengo_title|safe }}</h1>  <!-- Use the new malengo_title field -->
+
+                    <!-- Display the dynamic content from the model -->
+                    <p>
+                        {{ home_data.malengo_content|safe }}
+                    </p>
+                </div>
+            </div>
+        
+    
+
+
+
+                <!-- Sidebar -->
+                <div class="col-md-3">
+                    <section>
+                        <div class="container">
+                            <div class="row">
+                                <div class="aside-block">
+                                    <!-- Recent Posts in the Sidebar -->
+                                    {% for recent_post in recent_posts %}
+                                        <div class="tab-pane fade show active" id="pills-popular" role="tabpanel" aria-labelledby="pills-popular-tab">
+                                            <div class="post-entry-1 border-bottom">
+                                                <div class="post-meta">
+                                                    <span class="date">{{ recent_post.created_at|date:"l, M d, Y" }}</span>
+                                                    <span class="mx-1">&bullet;</span>
+                                                    <span>{{ recent_post.author.user.username }}</span>
+                                                </div>
+                                                <h2 class="mb-2"><a href="{% url 'post_detail' recent_post.id %}">{{ recent_post.title }}</a></h2>
+                                                <span class="author mb-3 d-block">{{ recent_post.author.user.username }}</span>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Swiper Initialization Script -->
+    <script>
+        var swiper = new Swiper('.swiper.sliderFeaturedPosts', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            speed: 500,
+            navigation: {
+                nextEl: '.custom-swiper-button-next',
+                prevEl: '.custom-swiper-button-prev',
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 2000,
+                disableOnInteraction: true,
+            },
+        });
+    </script>
+
+{% endblock %}
+
+{% block extend_footer %}
+    
+{% endblock %}
+</body>
+</html>

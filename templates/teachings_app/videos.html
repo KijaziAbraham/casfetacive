@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block extend_head %}
+    <title>CASFETA Website - Teachings</title>
+{% endblock %}
+
+{% block content %}
+    <section class="single-post-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 post-content" data-aos="fade-up">
+
+                    <!-- ======= Single Post Content ======= -->
+                    <div class="single-post">
+                        <h1>Video List</h1>
+
+                        {% for video in videos %}
+                        <section>
+                            <h2>{{ video.title|safe }}</h2>
+                            <span class="date">{{ video.video_created_at|date:"F d, Y" }}</span>
+                            
+                            {% if video.thumbnail_image %}
+                                <video controls width="100%" poster="{{ video.thumbnail_image.url }}">
+                            {% else %}
+                                <video controls width="100%">
+                            {% endif %}
+                            
+                            <source src="{{ video.video_file.url }}" type="video/mp4">
+                            Your browser does not support the video element.
+                            </video>
+                        </section>
+                        
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extend_footer %}
+    <!-- Include any additional footer content if needed -->
+{% endblock %}
+
+</body>
+</html>
+<!-- teachings_app/templates/teachings_app/video_list.html -->

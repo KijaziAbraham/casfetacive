@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{% block extend_head %}
+    <title>CASFETA Website - Teachings</title>
+{% endblock %}
+
+{% block content %}
+    <section class="single-post-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-9 post-content" data-aos="fade-up">
+
+                    <!-- ======= Single Post Content ======= -->
+                    <div class="single-post">
+                        <h1>books List</h1>
+
+                        {% for book in books %}
+                        <article>
+                            <span class="date">{{ book.book_created_at|date:"F d, Y" }}</span>
+                            <h2>{{ book.title |safe}}</h2>
+                            <p>Author: {{ book.author }}</p>
+                             <iframe src="{{ book.content.url}}" width="100%" height="500px"></iframe>
+                        </article>
+                    {% endfor %}
+                    
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block extend_footer %}
+    <!-- Include any additional footer content if needed -->
+{% endblock %}
+
+</body>
+</html>
+<!-- teachings_app/templates/teachings_app/book_list.html -->

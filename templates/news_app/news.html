@@ -1,0 +1,163 @@
+<!-- news_app/news.html -->
+{% extends 'main.html' %}
+{% load static %}
+
+
+
+{% block extend_head %}
+    <title>CASFETA CIVE News</title>
+{% endblock %}
+
+{% block content %}
+
+    
+   <!-- Latest News Section -->
+   <section class="single-post-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 post-content" data-aos="fade-up">
+                <div class="table-responsive">
+                    <h3 class="category-title">BLOG</h3>
+
+                    {% for post in posts|slice:":5" %}
+                        <section class="post-news post-news-wide">
+                            <a href="{% url 'post_detail' post.id %}">
+                                {% if post.image %}
+                                    <img class="img-responsive w-100" src="{{ post.image.url }}" alt="{{ post.title }}">
+                                {% else %}
+                                    <img class="img-responsive w-100" src="{% static 'img/living_kingdom_of_god.jpg' %}" alt="Placeholder">
+                                {% endif %}
+                            </a>
+
+                            <h3 class="text-primary fw-bold"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h3>
+                            <div class="post-news-body">
+                                <div class="post-meta">
+                                    <span class="date">{{ post.created_at|date:"M d, Y" }}</span>
+                                    <span class="mx-1">&bullet;</span>
+                                    <span>{{ post.author.user }}</span>
+                                </div>
+                                <div class="offset-top-20">
+                                    <!-- Use the truncatewords filter to limit the content to a certain number of words -->
+
+
+
+<p>{{ post.content|truncatewords:100|safe }} 
+    <a href="{% url 'post_detail' post.id %}" class="read-more-link">
+        Read More&nbsp;&nbsp;<i class="fa-solid fa-arrow-right"></i>
+    </a>
+</p>
+                
+                            </div>
+                                 
+                        </section>
+                    {% endfor %}
+                
+
+                    <!-- CSS -->
+<style>
+    .read-more-link {
+        font-size: 15px;
+        color: blue;
+    }
+</style>
+
+<!-- Add this block at the end of your template -->
+<div class="pagination">
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ posts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">next</a>
+            <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+</div>
+</div>
+
+           <!-- Sidebar -->
+<div class="col-md-3">
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="aside-block">
+
+                    <!-- Recent Posts in the Sidebar -->
+                    {% if recent_posts %}
+                    <div class="sidebar-section">
+                        <h3 class="section-title">Recent Posts</h3>
+                        {% for recent_post in recent_posts %}
+                        <div class="post-entry-1 border-bottom">
+                            <div class="post-meta">
+                                <span class="date">{{ recent_post.created_at|date:"l, M d, Y" }}</span>
+                                <span class="mx-1">&bullet;</span>
+                                <span>{{ recent_post.author.user.username }}</span>
+                            </div>
+                            <h2 class="mb-2"><a href="{% url 'post_detail' recent_post.id %}">{{ recent_post.title }}</a></h2>
+                            <span class="author mb-3 d-block">{{ recent_post.author.user.username }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p>No recent posts available.</p>
+                    {% endif %}
+
+                    <!-- CIVE Photo Gallery Section -->
+                    <div class="offset-top-60">
+                        <h6 class="fw-bold">Photo Gallery</h6>
+                        <div class="text-subline"></div>
+                        <div class="offset-top-20 text-start">
+                            <a href="{% url 'gallery_detail'  %}">
+                                <div class="col-12">
+                                    <img src="{% static 'img/gallery.jpg' %}" alt="cive photo library" class="img-fluid mb-4">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Instagram Updates Section -->
+                    <div class="offset-top-60">
+                        <h6 class="fw-bold">CIVE Updates</h6>
+                        <div class="text-subline"></div>
+                        <div class="offset-top-20 text-start">
+                            <div class="fb-root fb-widget">
+                                <div class="fb-page-responsive">
+                                      <div class="fb-page fb_iframe_widget" data-href="https://web.facebook.com/simbatanzania/" data-tabs="timeline" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" fb-xfbml-state="rendered" fb-iframe-plugin-query="adapt_container_width=true&amp;app_id=&amp;container_width=259&amp;hide_cover=false&amp;href=https%3A%2F%2Fweb.facebook.com%2Fsimbatanzania%2F&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;small_header=false&amp;tabs=timeline">
+                                            <span style="vertical-align: bottom; width: 259px; height: 500px;">
+                                                <iframe name="f2b51c94f1b0b94" width="1000px" height="1000px" data-testid="fb:page Facebook Social Plugin" title="fb:page Facebook Social Plugin" frameborder="0" allowtransparency="true" allowfullscreen="true" scrolling="no" allow="encrypted-media" src="https://www.facebook.com/v10.0/plugins/page.php?adapt_container_width=true&amp;app_id=&amp;channel=https%3A%2F%2Fstaticxx.facebook.com%2Fx%2Fconnect%2Fxd_arbiter%2F%3Fversion%3D46%23cb%3Df2a58eb91584b78%26domain%3Dwww.udom.ac.tz%26is_canvas%3Dfalse%26origin%3Dhttps%253A%252F%252Fwww.udom.ac.tz%252Ff2684a1700a98f8%26relation%3Dparent.parent&amp;container_width=259&amp;hide_cover=false&amp;href=https%3A%2F%2Fweb.facebook.com%2Fsimbatanzania%2F&amp;locale=en_US&amp;sdk=joey&amp;show_facepile=true&amp;small_header=false&amp;tabs=timeline" style="border: none; visibility: visible; width: 259px; height: 500px;" class=""></iframe>
+                                            </span>
+                                    <!-- Facebook Page Embed Code Goes Here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+
+                    <!-- Add more sidebar sections as needed -->
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</div>
+</div>
+</section>
+
+    
+
+{% endblock %}
+
+{% block extend_footer %}
+{% endblock %}
+</body>
+</html>
+                   </div>
